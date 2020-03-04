@@ -5,28 +5,45 @@ import javax.swing.JOptionPane;
 
 public class Main {
 
+	
+	/**
+	 * REQUISITOS DO PROJETO
+	 * Somente é possivel cadastrar uma pessoa onde:
+	 * nome: não pode ser em branco e ter que ter mais de 3 caracteres
+	 * salario: não pode ser menor que 0 e maior que 10000.
+	 * 
+	 * No listar nomes, deve visualizar somente o nome da pessoa (sem sobrenome)
+	 * 
+	 * Na listagem total, apresentar:
+	 * nome completo
+	 * salário total
+	 * No desconto, se o salario for ate 5000, desconto e + 0,02%, acima disso 0.05% 
+	 * 
+	 * 
+	 */
+	
 	/*
 	 * ALTERAÇÕES PARA FAZER
 	 * 1. Retirar a validacao de valor minimo de caracteres do nome da pessoa
 	 * 2. Alterar o valor do limite do salário para 12000
 	 * 4. alterar o desconto do salario
-	 * 3. alterar a forma de buscar o nome do usuario
+	 * 3. alterar a forma de buscar o nome do usuario (sem sobrenome)
 	 * 
 	 */
 	
 	
 	
-	static BancoDados banco = new BancoDados();
+	BancoDados banco = new BancoDados();
 	public static void main(String[] args) {
-		
+		Main main = new Main();
 		while(true) {
 		String opcao = JOptionPane.showInputDialog(null, "Selecione uma opção\n1.Salvar\n2.Listar Nomes\n3.Listar salários e descontos\n4.Sair");
 			if("1".equals(opcao)) {
-				salvar();
+				main.salvar();
 			}else if("2".equals(opcao)) {
-				listar();
+				main.listar();
 			}else if("3".equals(opcao)) {
-				listarSalario();
+				main.listarSalario();
 			}
 			else if("4".equals(opcao)) {
 				break;
@@ -39,33 +56,27 @@ public class Main {
 		
 	}
 
-	private static void listarSalario() {
+	private  void listarSalario() {
 		StringBuilder message = new StringBuilder();
 		List<Pessoa> list = banco.getPessoas();
+		
 		for(Pessoa pessoa : list) {
 			float salarioDesconto =  calculaDesconto( pessoa.getSalario());
 			message.append("nome: " + pessoa.getNome() + "\n");
 			message.append("salario: " + pessoa.getSalario() + "\n");
 			message.append("desconto salario: " + salarioDesconto + "\n");
-			message.append("------------------------\n");
-			
+			message.append("------------------------\n");			
 		}
+		
 		JOptionPane.showMessageDialog(null,message.toString());
 	}
+	
 
-	private static float calculaDesconto(float salario) {
-		if(salario < 10000) {
-			return salario * 0.02f;
-		}
-		return 0;
+	private  void listar() {
+		JOptionPane.showMessageDialog(null,banco.listarPrimeiroPessoas());		
 	}
 
-	private static void listar() {
-		JOptionPane.showMessageDialog(null,banco.listarPrimeiroPessoas());
-		
-	}
-
-	private static void salvar() {
+	private  void salvar() {
 		String nome = JOptionPane.showInputDialog(null, "Digite o nome");	
 		String salario = JOptionPane.showInputDialog(null, "Digite o salario");		
 		
@@ -88,7 +99,7 @@ public class Main {
 	}
 
 	// retorna FALSE, se pessoa tiver problemas nos seus dados, ou TRUE, se tudo estiver sido OK.
-	private static boolean validaPessoa(Pessoa pessoa) {
+	private  boolean validaPessoa(Pessoa pessoa) {
 		boolean ret = false;
 		if(pessoa.getNome().equals("") || pessoa.getNome().length() < 4 ) {
 			ret = false;
@@ -99,6 +110,15 @@ public class Main {
 		}
 		return ret;
 		
+	}
+	
+	private  float calculaDesconto(float salario) {
+		if(salario > 0 &&  salario <= 5000) {
+			return salario * 0.02f;
+		}else if(salario > 5000 &&  salario < 10000) {
+			return salario * 0.05f;
+		}
+		return 0;
 	}
 	
 	

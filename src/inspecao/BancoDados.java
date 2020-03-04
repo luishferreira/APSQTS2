@@ -8,7 +8,7 @@ public class BancoDados {
 	
 	public boolean salvarPessoa(Pessoa pessoa) {
 		
-		if(pessoa.getSalario() < 10000 && pessoa.getNome().equals("") == false) {	
+		if(pessoa != null) {	
 			System.out.println("salvo no banco");
 			 lista.add(pessoa);
 		    return true;
@@ -16,12 +16,7 @@ public class BancoDados {
 			System.out.println("nao salvo no banco");
 			return false;
 		}
-		
-	
 	}
-	
-	
-	
 	
 	public String listarPrimeiroPessoas() {
 		StringBuilder message = new StringBuilder();
@@ -29,18 +24,12 @@ public class BancoDados {
 		for(Pessoa pessoa : lista) {
 			String nome = pessoa.getNome().split(" ")[0];
 			message.append(nome).append("\n");
-		}
-		
+		}		
 		return message.toString();
 	}
 
-
-
-
 	public List<Pessoa> getPessoas() {
-		return lista;
-		
-	}
-	
+		return lista;		
+	}	
 	
 }

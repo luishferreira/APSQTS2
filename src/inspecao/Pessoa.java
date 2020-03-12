@@ -3,7 +3,7 @@ package inspecao;
 public class Pessoa {
 
 
-	private String nome;
+	private String nome ;
 	private float salario;
 	
 	public String getNome() {

@@ -99,9 +99,13 @@ public class Main {
 	}
 
 	// retorna FALSE, se pessoa tiver problemas nos seus dados, ou TRUE, se tudo estiver sido OK.
-	private  boolean validaPessoa(Pessoa pessoa) {
+	public  boolean validaPessoa(Pessoa pessoa) {
 		boolean ret = false;
-		if(pessoa.getNome().equals("") ) {
+		if(pessoa == null){
+			ret =false;
+		}else if(pessoa.getNome() == null){
+			ret =false;
+		}else if(pessoa.getNome().equals("") ) {
 			ret = false;
 		}else if(pessoa.getSalario() < 0 || pessoa.getSalario() > 10000) {
 			ret = false;

@@ -65,5 +65,32 @@ public class MainTest {
 	}
 	
 	
+	@Test
+	public void testValidaPessoaSemNenhumaInformacao(){
+		Main main = new Main();
+		Pessoa pessoa = new Pessoa();		
+		boolean saidaExp = false;
+		Assert.assertEquals(saidaExp,main.validaPessoa(pessoa));
+	}
+
+	
+	@Test
+	public void testValidaPessoaComTodasasInformacaoPreenchidaseOK(){
+		Main main = new Main();
+		Pessoa pessoa = new Pessoa();		
+		pessoa.setNome("jose");
+		pessoa.setSalario(300);
+		boolean saidaExp = true;
+		Assert.assertEquals(saidaExp,main.validaPessoa(pessoa));
+	}
+	
+	@Test
+	public void testValidaPessoaNull(){
+		Main main = new Main();		
+		Pessoa pessoa = null;
+		boolean saidaExp = false;
+		Assert.assertEquals(saidaExp,main.validaPessoa(pessoa));
+	}
+	
 
 }

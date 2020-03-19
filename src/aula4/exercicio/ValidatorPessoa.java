@@ -14,11 +14,19 @@ public class ValidatorPessoa {
          
         // EXEMPLO, validacao de uma parte do campo NOME
         if(pessoa.getNome().equals("")){
-            ret = false;
+            return  false;
         }
         if(pessoa.getNome().length() > 30){
-        	ret = false;
+        	return false;
         }
+        
+        if(pessoa.getEndereco().equals("")){
+        	return false;
+        }
+        if(pessoa.getEndereco().length() > 50){
+        	return false;
+        }
+        
         return ret;
     }
     

@@ -29,7 +29,10 @@ public BancoDados(){
 }
     
  
-//Método de Conexão//
+// funciona somente no banco de dados postgress
+// deve ser inserido o driver.
+// deve ser criado a tabela no banco
+
  
 private void conectaBanco() { 
            
@@ -39,7 +42,6 @@ private void conectaBanco() {
 		Properties props = new Properties();
 		props.setProperty("user","postgres");
 		props.setProperty("password","123456");
-		//props.setProperty("ssl","true");
 		connection = DriverManager.getConnection(url, props);
 		if (connection != null) {
 	        System.out.println("STATUS--->Conectado com sucesso!");
@@ -51,7 +53,8 @@ private void conectaBanco() {
 		 	System.out.println("Error ao conectar o banco de dados");
 	        e.printStackTrace();
 	}
-	
+
+	// VERS�O ABAIXO MYSQL
 	
 //    try {
 //    String driverName = "com.mysql.jdbc.Driver";
@@ -77,23 +80,17 @@ private void conectaBanco() {
     }
     
     public int insertPessoa(Pessoa p){
-        String sql = "insert into pessoa (nome,idade) value('"+
-                p.getNome() + "',"+ p.getIdade() + ")";
+        String sql = "insert into pessoa (nome,idade) values('"+
+                p.getNome() + "',"+ p.getIdade() + ") RETURNING id";
      
         System.out.println("sql insert " + sql);
         
         try{
-            connection.createStatement().execute(sql);
-             ResultSet resultSet = connection.createStatement().
-                     executeQuery("SELECT LAST_INSERT_ID()");
-            if (resultSet.next()) {
-                int id =   resultSet.getInt("LAST_INSERT_ID()");
-                p.setId(id);
-                return id;
-            }else{
-                return -1;
-            }
-           
+        	ResultSet rs = connection.createStatement().executeQuery(sql);
+        	rs.next();
+            int id =  rs.getInt(1);
+            p.setId(id);
+            return id;
            
         }catch(Exception e){
             System.out.println("Error na insercao pessoa " + e);
@@ -103,7 +100,7 @@ private void conectaBanco() {
     }
     
     public boolean deletePessoa(int id){
-        String sql = "delete from  pessoa where idpessoa = "+ id;
+        String sql = "delete from  pessoa where id = "+ id;
         System.out.println("sql delete " + sql);
         
         try{
@@ -118,7 +115,7 @@ private void conectaBanco() {
     
     public boolean updatePessoa(Pessoa p){
         String sql = "update  pessoa set nome = '" + p.getNome() 
-                + "', idade = " + p.getIdade() + " where idpessoa = " + p.getId() ;
+                + "', idade = " + p.getIdade() + " where id = " + p.getId() ;
               
         System.out.println("sql update " + sql);
         
@@ -143,7 +140,7 @@ private void conectaBanco() {
           
          while(resultSet.next()){
             Pessoa pessoa = new Pessoa();
-            pessoa.setId(resultSet.getInt("idpessoa"));
+            pessoa.setId(resultSet.getInt("id"));
             pessoa.setNome(resultSet.getString("nome"));
             pessoa.setIdade(resultSet.getInt("idade"));
             lista.add(pessoa);
@@ -158,7 +155,7 @@ private void conectaBanco() {
     
      public Pessoa  buscaPessoa(int idPessoa){
        
-        String sql = "select * from pessoa where idpessoa =" + idPessoa;             ;
+        String sql = "select * from pessoa where id =" + idPessoa;             ;
         System.out.println("sql select " + sql);
          Pessoa pessoa = null;
         try{
@@ -168,7 +165,7 @@ private void conectaBanco() {
           
          while(resultSet.next()){
              pessoa = new Pessoa();
-            pessoa.setId(resultSet.getInt("idpessoa"));
+            pessoa.setId(resultSet.getInt("id"));
             pessoa.setNome(resultSet.getString("nome"));
             pessoa.setIdade(resultSet.getInt("idade"));
             

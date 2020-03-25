@@ -1,6 +1,6 @@
 package aula6;
 /*
- * To change this license header, choose License Headers in Project Properties.
+ * 
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
@@ -27,7 +27,7 @@ public class BancoDadosIntegracaoTest {
     public void testInsert(){
         Pessoa pessoa = new Pessoa();
         pessoa.setIdade(60);
-        pessoa.setNome("joão");
+        pessoa.setNome("joao");
         banco.insertPessoa(pessoa);
         int id = pessoa.getId();
         assertNotNull(banco.buscaPessoa(id));

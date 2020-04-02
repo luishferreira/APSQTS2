@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package aula6;
+package aula5;
 
 /**
  *
@@ -19,8 +19,8 @@ public class Main {
        
        // crio pessoa para salvar
        Pessoa pessoa = new Pessoa();
-       pessoa.setNome("pedro");
-       pessoa.setIdade(40);
+       pessoa.setNome("marcelo soares");
+       pessoa.setIdade(90);
        // insere no banco, e retorna o id da pessoa
        int idPessoa = banco.insertPessoa(pessoa);
        System.out.println("id pessoa: " + idPessoa); 

@@ -1,4 +1,4 @@
-package aula6;
+package aula5;
 /*
  * 
  * To change this template file, choose Tools | Templates
@@ -7,6 +7,10 @@ package aula6;
 
 
 import org.junit.Test;
+
+import aula5.BancoDados;
+import aula5.Pessoa;
+
 import static org.junit.Assert.*;
 import org.junit.Before;
 
@@ -60,6 +64,7 @@ public class BancoDadosIntegracaoTest {
     
     @Test
     public void testListPessoa(){
+    	
         Pessoa pessoa = new Pessoa();
         pessoa.setIdade(70);
         pessoa.setNome("jesus");

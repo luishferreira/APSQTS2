@@ -19,8 +19,10 @@ public class ValidatorPessoaTest {
     @Test
     public void testvalidaNomeOk(){
         ValidatorPessoa validator = new ValidatorPessoa();
-        Pessoa pessoa = criaPessoaOk();        
-        Assert.assertTrue(validator.validar(pessoa));
+        Pessoa pessoa = criaPessoaOk();
+        boolean resultado = validator.validar(pessoa);
+        Assert.assertEquals(true, resultado);
+        Assert.assertTrue(resultado);
     }
     
     @Test
@@ -29,6 +31,7 @@ public class ValidatorPessoaTest {
         Pessoa pessoa = criaPessoaOk();
         pessoa.setNome("");
         Assert.assertFalse(validator.validar(pessoa));
+        Assert.assertEquals(false, validator.validar(pessoa));
     }
     
     @Test

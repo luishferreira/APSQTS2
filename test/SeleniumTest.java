@@ -37,7 +37,7 @@ public class SeleniumTest {
         
          driver = new ChromeDriver();
 
-        driver.get("C:\\Users\\marcelo.soares\\Documents\\NetBeansProjects\\QPPSW\\ExemploPraticoAula11QPPSW\\src\\login.html");
+        driver.get("C:\\Users\\marcelo.soares\\eclipse-workspace\\senai_2020_qts\\src\\login.html");
     
         namePaginaPrincipal = driver.getWindowHandle();
     }
@@ -46,7 +46,7 @@ public class SeleniumTest {
     
     @Test
     public void testTituloPaginaLogin(){
-      driver.get("C:\\Users\\marcelo.soares\\Documents\\NetBeansProjects\\QPPSW\\ExemploPraticoAula11QPPSW\\src\\login.html");
+      driver.get("C:\\Users\\marcelo.soares\\eclipse-workspace\\senai_2020_qts\\src\\login.html");
       String tituloExperado ="Pagina de Login"; 
         
       Assert.assertEquals(tituloExperado,driver.getTitle());
@@ -54,7 +54,7 @@ public class SeleniumTest {
     
      @Test
     public void testLogin(){
-        driver.get("C:\\Users\\marcelo.soares\\Documents\\NetBeansProjects\\QPPSW\\ExemploPraticoAula11QPPSW\\src\\login.html");
+        driver.get("C:\\Users\\marcelo.soares\\eclipse-workspace\\senai_2020_qts\\src\\login.html");
         
         WebElement campoNome = driver.findElement(By.id("nome"));
          WebElement campoSenha = driver.findElement(By.id("senha"));
@@ -68,13 +68,13 @@ public class SeleniumTest {
     
     @Test
     public void testAlert(){
-        driver.get("C:\\Users\\marcelo.soares\\Documents\\NetBeansProjects\\QPPSW\\ExemploPraticoAula11QPPSW\\src\\login.html");
+        driver.get("C:\\Users\\marcelo.soares\\eclipse-workspace\\senai_2020_qts\\src\\login.html");
 
         WebElement campoNome = driver.findElement(By.id("nome"));
         WebElement campoSenha = driver.findElement(By.id("senha"));
          WebElement submit = driver.findElement(By.id("submit"));
-         campoNome.sendKeys("usuario_invalido");
-         campoSenha.sendKeys("senha_invalido");
+         campoNome.sendKeys("sdkskldksld");
+         campoSenha.sendKeys("ksdklsdklsdklsd");
          submit.click();
        
          Alert alert = driver.switchTo().alert();
@@ -87,6 +87,7 @@ public class SeleniumTest {
     
     @AfterClass
     public static void tearDown() {
+    	
         driver.quit();
     }
     
